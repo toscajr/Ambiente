@@ -1,0 +1,21 @@
+File name: Created by Natural V 5.1.1 Software AG 2001
+Status   : 
+Start    : 
+End      : 
+Records  : 
+Userid   : WSH     
+Library  :         
+Program  : YAREP-P1
+Buffers  : 
+Globals  : .,=
+Format   : N08.0A1EA01A1EP03.2P03.2P03.0P03.0P03.0
+Names    : 
+           yacht-id
+           yacht-name
+           yacht-branch
+           yacht-type
+           length
+           width
+           sail-surface
+           motor
+           bunks

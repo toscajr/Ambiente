@@ -1,0 +1,41 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+*
+* Program for form list "Yachts sorted by Yacht-Type"
+*
+DEFINE DATA
+LOCAL USING YA---VL0
+LOCAL
+1 #MORE   (A1) INIT <'Y'>
+END-DEFINE
+*
+FORMAT PS=18
+*
+WRITE TITLE
+  'SAG-TOURS Yacht-List' /
+  30T 'Built:   ' *DAT4E
+  67T 'Page:' *PAGE-NUMBER /
+  '=' (79)
+*
+R1.
+READ YACHT-V WITH YACHT-TYPE
+*            WITH YACHT-BRANCH-SP >= 'B'   /* only sailing yachts
+*
+  WRITE NOTITLE USING FORM 'YA-FORM1'
+  SKIP 2
+*
+  AT END OF PAGE
+    INPUT / 'Do you want to continue ?(Y/N)' #MORE (AD=MIT IP=OFF)
+    IF #MORE = 'N'
+      ESCAPE BOTTOM (R1.)IMMEDIATE
+    END-IF
+  END-ENDPAGE
+END-READ
+*
+FETCH 'MELI--P0'
+*
+END
+

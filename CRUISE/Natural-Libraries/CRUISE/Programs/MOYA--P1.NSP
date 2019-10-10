@@ -1,0 +1,110 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+*
+*  Program for the function: Modify Yacht
+*
+DEFINE DATA
+GLOBAL USING ST----G0           /* Fields of message line
+LOCAL  USING LAYOUT-L           /* all local frame fields
+LOCAL  USING YA---VL0           /* Local data view for DB access
+LOCAL  USING YA---ML0           /* local user variables
+LOCAL  USING YA----A0           /* PDA used as LDA
+END-DEFINE
+*                               /* Initialize function keys
+INCLUDE DFPF--C0
+*                               /* Initialize map variables
+#PROG    := *PROGRAM
+#TITLE   := '    Modify Yacht'
+*                               /* Control variables for key status
+#KEY-C   := (AD=I)
+#DATA-C  := (AD=P)
+*
+REP.
+REPEAT
+*                                                 /* Map output
+  INPUT WITH TEXT #G-MESSAGE-TEXT, #G-OPERAND1
+  USING MAP 'MAYA--M1'
+  RESET #G-MESSAGE #RESPONSE-CODE
+*                                                 /* Distinction of cases
+  DECIDE FOR FIRST CONDITION
+    WHEN *PF-KEY = 'ENTR' AND #DATA               /* Continue
+      IGNORE
+    WHEN *PF-KEY = 'ENTR' AND NOT #DATA           /* Key status
+      PERFORM KEY-CHECK
+    WHEN *PF-KEY = 'PF3'  AND #DATA               /* Data status
+      PERFORM UPDATE-YACHT                        /* Modify Yacht
+      IF #RESPONSE-CODE = 0
+        END TRANSACTION                           /* Transaction control
+      ELSE
+        BACKOUT TRANSACTION
+      END-IF
+      ESCAPE BOTTOM (REP.)
+    WHEN *PF-KEY = 'PF12'
+      #G-MESSAGE-TEXT := 'Yacht :1: modification was cancelled!'
+      #G-OPERAND1     := YACHT-M.YACHT-ID
+      ESCAPE BOTTOM (Rep.)                        /* Cancellation
+    WHEN NONE
+      #G-MESSAGE-TEXT := 'Please select valid function!'
+  END-DECIDE
+END-REPEAT
+*
+FETCH 'MEYA--P0'                                  /* Return to submenu
+
+*
+* Inline Subroutines
+*
+DEFINE SUBROUTINE KEY-CHECK
+IF #KEY-C NOT MODIFIED
+  #G-MESSAGE-TEXT  := 'Please enter Yacht-ID!'
+ELSE                                        /* Database access
+*                                           /* Check yacht-ID for existence
+*                                           /* non-existence
+  /* FIND YACHT-V WITH YACHT-ID = YACHT-M.YACHT-ID
+  /*     IF NO RECORDS FOUND
+  /*      #RESPONSE-CODE := 1
+  /*      ESCAPE BOTTOM
+  /*   END-NOREC
+  /*   MOVE BY NAME YACHT-V TO YACHT-M
+  /*   UPDATE                               /* for pessimistic locking
+  /*   MOVE *ISN TO #ISN                    /* ISN for GET
+  /* END-FIND
+  /*
+  CALLNAT 'REYA--N1' YACHT-M.YACHT-ID #RESPONSE-CODE YACHT-P /* with HOLD
+  MOVE BY NAME YACHT-P TO YACHT-M
+  /*
+* ...
+  IF #RESPONSE-CODE = 0                     /* Yacht exists
+    #DATA           := TRUE                 /* Apply map status
+    #KEY-C          := (AD=PI)              /* Apply control variables
+    #DATA-C         := (AD=I)               /* I for add / change yacht
+  ELSE                                      /* Yacht does not exist
+    #G-MESSAGE-TEXT := 'Yacht :1: does not exist !'
+    #G-OPERAND1     := YACHT-M.YACHT-ID
+    RESET YACHT-M
+  END-IF
+END-IF
+END-SUBROUTINE
+*
+*
+DEFINE SUBROUTINE UPDATE-YACHT
+*                                          /* Read and change record
+/* GET  YACHT-V #ISN                       /* post-read
+/*      MOVE BY NAME #YACHT-M TO YACHT-V
+/*      UPDATE                             /* change
+/*      END TRANSACTION
+MOVE BY NAME YACHT-M TO YACHT-P
+CALLNAT 'MOYA--N1' YACHT-M.YACHT-ID #RESPONSE-CODE YACHT-P  /* see skeleton p.D-22
+IF #RESPONSE-CODE = 0
+  #G-MESSAGE-TEXT := 'Yacht :1: was modified!'  /* Yacht ok modified
+  #G-OPERAND1     := YACHT-M.YACHT-ID
+ELSE
+  #G-MESSAGE-TEXT := 'Yacht :1: was not modified!'
+  #G-OPERAND1     := YACHT-M.YACHT-ID
+END-IF
+END-SUBROUTINE
+*
+END
+

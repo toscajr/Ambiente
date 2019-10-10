@@ -1,0 +1,8 @@
+DEFINE DATA LOCAL
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+1 CRUISE-V VIEW OF SAG-TOURS-E-CRUISE
+  2 ID-YACHT (N8,0) /* ID of yacht sailing cruise
+END-DEFINE

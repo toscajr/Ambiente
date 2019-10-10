@@ -1,0 +1,29 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+*
+*  Single-record access to database object YACHT with known primary key
+*
+DEFINE DATA
+PARAMETER
+1 #KEY                (N8)    /*  IN   Format/length of primary key field
+1 #RESPONSE-CODE      (N4)    /*  OUT  0: OK  1: Record not found
+PARAMETER USING YA----A0      /*  OUT  PDA of object to be read
+LOCAL     USING YA---VL0      /*  Database access view
+END-DEFINE
+*
+RESET #RESPONSE-CODE
+*
+FIND YACHT-V WITH YACHT-ID = #KEY
+  IF NO RECORDS FOUND
+    #RESPONSE-CODE := 1
+    ESCAPE BOTTOM
+  END-NOREC
+  MOVE BY NAME YACHT-V TO YACHT-P     /* Transfer all standard fields
+  UPDATE                              /* Read with HOLD - pessimistic
+END-FIND
+*
+END
+

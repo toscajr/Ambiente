@@ -1,0 +1,32 @@
+DB: 000 FILE: 018  - SAG-TOURS-E-YACHT                DEFAULT SEQUENCE:   
+TYPE: ADABAS
+ 
+T L DB Name                              F Leng  S D Remark
+- - -- --------------------------------  - ----  - - ------------------------
+*      >Natural Source Header 000000
+*      :CP
+*      
+*      
+*      :LineIncrement 10
+*      <Natural Source Header
+  1 DB YACHT-ID                          N  8,0  N D 
+  1 DC YACHT-NAME                        A   30  N D 
+  1 DE YACHT-BRANCH                      A    1  N   
+  1 DN ID-CH-BASE                        A    8  N D 
+  1 DP ID-S-OWNER                        N  8,0  N D 
+  1 DM DID-DESCRIPTION                   A    8  N D 
+  1 DD YACHT-TYPE                        A   30  N D 
+  1 DF LENGTH                            P  3,2  N   
+  1 DG WIDTH                             P  3,2  N   
+  1 DH DRAFT                             P  3,2  N   
+  1 DI SAIL-SURFACE                      P  3,0  N   
+  1 DJ MOTOR                             P  3,0  N   
+  1 DK HEAD-ROOM                         P  3,2  N   
+  1 DL BUNKS                             P  3,0  N   
+  1 DQ YACHT-NAME-PH                     A   30  N P 
+  1 DR YACHT-BRANCH-SP                   A    9  N S 
+*      -------- SOURCE FIELD(S) -------
+*      YACHT-BRANCH(1-1)
+*      YACHT-ID(1-8)
+  1 TS LAST-UPDATE                       B    8  N   
+******DDM OUTPUT TERMINATED******

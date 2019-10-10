@@ -1,0 +1,83 @@
+DB: 000 FILE: 018  - SAG-TOURS-E-CRUISE               DEFAULT SEQUENCE:   
+TYPE: ADABAS
+ 
+T L DB Name                              F Leng  S D Remark
+- - -- --------------------------------  - ----  - - ------------------------
+*      >Natural Source Header 000000
+*      :CP
+*      
+*      
+*      :LineIncrement 10
+*      <Natural Source Header
+*      Generation started                            
+*      at 93-08-02 17:22:36                          
+*      by user DBA                                   
+*                                                    
+*                                                    
+*      Cruise data                                   
+*                                                    
+  1 CI CRUISE-ID                         N  8,0  N D 
+  1 CJ CRUISE-TYPE                       A    1  N   'A' if charter cruis
+*      'A' if charter cruise                         
+*      'B' if sailor cruise                          
+  1 CK CRUISE-STATUS                     A    1  N N 0 = currently planne
+*      0 = currently planned                         
+*      (not yet in catalog)                          
+*      1 = available                                 
+G 1 CL START                                         
+  2 CM START-DATE                        N  8,0    D 
+  2 CN START-TIME                        N  6,0  N   
+G 1 CO END                                           
+  2 CP END-DATE                          N  8,0  N D 
+  2 CQ END-TIME                          N  6,0  N   
+  1 CR START-HARBOR                      A   20    D 
+  1 CS DESTINATION-HARBOR                A   20    D 
+  1 CT ID-YACHT                          N  8,0  N D ID of yacht sailing
+*      ID of yacht sailing cruise                    
+  1 CU ID-PREDECESSOR                    N  8,0  N D ID of predecessor cr
+*      ID of predecessor cruise                      
+  1 CV ID-SUCCESSOR                      N  8,0  N D ID of successor crui
+*      ID of successor cruise                        
+G 1 CW CHARTER-CRUISE                                only for CRUISE-TYPE
+*      only for CRUISE-TYPE = 'A'                    
+  2 CX CHARTER-YACHT-TYPE                A   30      
+  2 CY ID-CHARTER-BASE                   A    8      the combination of t
+*      the combination of this two                   
+*      IDs defines the CH-PRICES                     
+G 1 CZ SAILING-CRUISE                                only for CRUISE-TYPE
+*      only for CRUISE-TYPE = 'B'                    
+  2 C0 ID-SKIPPER                        N  8,0  N D PERSON-ID of skipper
+*      PERSON-ID of skipper                          
+  2 C1 CRUISE-PRICE                      P 10,3  N   
+  2 C2 BUNK-NUMBER                       P  3,0  N   
+P 2 C3 SAILOR                                        
+  3 C4 AGE                               P  2,0  N   
+  3 C5 NAME                              A   30  N   
+  3 C6 EXPERIENCE                        A    1  N   'Y' if sailor has sa
+*      'Y' if sailor has sailor                      
+*      experience                                    
+M 3 C7 LANGUAGES                         A    3  N   
+  3 C8 ID-CONTRACT                       P  6,0  N D ID of sailor contrac
+*      ID of sailor contract                         
+  1 T6 CRUISE-TIMESTAMP                  T   12  N   used for Natural Con
+*      used for Natural Constract                    
+  1 EG CRUISE-TYPE-SP                    A    9  N S 
+*      -------- SOURCE FIELD(S) -------
+*      CRUISE-TYPE(1-1)
+*      CRUISE-ID(1-8)
+  1 DA CHARTER-PRICES-SP                 A   38    S 
+*      -------- SOURCE FIELD(S) -------
+*      CHARTER-YACHT-TYPE(1-30)
+*      ID-CHARTER-BASE(1-8)
+  1 EF START-DATE-DESTINATION            A   49  N S 
+*      -------- SOURCE FIELD(S) -------
+*      CRUISE-TYPE(1-1)
+*      START-HARBOR(1-20)
+*      START-DATE(1-8)
+*      DESTINATION-HARBOR(1-20)
+  1 TS LAST-UPDATE                       B    8  N   
+  1 MM START-DATE-ID                     B   16  N S 
+*      -------- SOURCE FIELD(S) -------
+*      START-DATE(1-8)
+*      CRUISE-ID(1-8)
+******DDM OUTPUT TERMINATED******

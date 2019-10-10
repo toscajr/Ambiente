@@ -1,0 +1,89 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 8.3.8 ---
+* WRITE USING MAP 'XXXXXXXX'
+*     YACHT-V.BUNKS YACHT-V.HEAD-ROOM YACHT-V.LENGTH YACHT-V.MOTOR
+*     YACHT-V.SAIL-SURFACE YACHT-V.WIDTH YACHT-V.YACHT-ID YACHT-V.YACHT-NAME YACHT-V.YACHT-TYPE
+DEFINE DATA PARAMETER
+1 YACHT-V.BUNKS (P03,0)
+1 YACHT-V.HEAD-ROOM (P03,2)
+1 YACHT-V.LENGTH (P03,2)
+1 YACHT-V.MOTOR (P03,0)
+1 YACHT-V.SAIL-SURFACE (P03,0)
+1 YACHT-V.WIDTH (P03,2)
+1 YACHT-V.YACHT-ID (N08,0)
+1 YACHT-V.YACHT-NAME (A030)
+1 YACHT-V.YACHT-TYPE (A030)
+END-DEFINE
+FORMAT PS=007 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* ,TT     OO   D I           D I        ?     +(                       *
+* 007079        N0NNUCN_ *         X         01 SYSPROF NL             *
+************************************************************************
+WRITE ( AD=D                                                          /*
+                                                                       )
+ 002T 'Yacht-Id  :'
+ 017T YACHT-V.YACHT-ID /*.01D008 N08,0.
+      (AD=ODL )
+/
+ 002T 'Yacht-Type:'
+ 017T YACHT-V.YACHT-TYPE /*.01U030 A030 .
+      (AD=ODL )
+/
+ 002T 'Yacht-Name:'
+ 017T YACHT-V.YACHT-NAME /*.01D030 A030 .
+      (AD=ODL )
+/
+/
+ 002T 'Yacht Data:'
+ 017T 'Length'
+ 029T ':'
+ 031T YACHT-V.LENGTH /*.01U006 P03,2.
+      (AD=ODL )
+ 040T 'm'
+ 049T 'Width :'
+ 057T YACHT-V.WIDTH /*.01U006 P03,2.
+      (AD=ODL )
+ 064T 'm'
+/
+ 017T 'Sail-Surface:'
+ 031T YACHT-V.SAIL-SURFACE /*.01U003 P03,0.
+      (AD=ODL )
+ 040T 'sq.m'
+ 049T 'Motor :'
+ 057T YACHT-V.MOTOR /*.01D003 P03,0.
+      (AD=ODL )
+ 064T 'kw'
+/
+ 017T 'Headroom'
+ 029T ':'
+ 031T YACHT-V.HEAD-ROOM /*.01U006 P03,2.
+      (AD=ODL )
+ 040T 'm'
+ 049T 'Bunks :'
+ 057T YACHT-V.BUNKS /*.01U003 P03,0.
+      (AD=ODL )
+* MAP2: VALIDATION *****************************************************
+RULEVAR D01YACHT-V.YACHT-ID                                                 
+* CDIR YACHT-V                          YACHT-ID                        ;
+RULEVAR D01YACHT-V.YACHT-TYPE                                               
+* CDIR YACHT-V                          YACHT-TYPE                      ;
+RULEVAR D01YACHT-V.YACHT-NAME                                               
+* CDIR YACHT-V                          YACHT-NAME                      ;
+RULEVAR D01YACHT-V.LENGTH                                                   
+* CDIR YACHT-V                          LENGTH                          ;
+RULEVAR D01YACHT-V.WIDTH                                                    
+* CDIR YACHT-V                          WIDTH                           ;
+RULEVAR D01YACHT-V.SAIL-SURFACE                                             
+* CDIR YACHT-V                          SAIL-SURFACE                    ;
+RULEVAR D01YACHT-V.MOTOR                                                    
+* CDIR YACHT-V                          MOTOR                           ;
+RULEVAR D01YACHT-V.HEAD-ROOM                                                
+* CDIR YACHT-V                          HEAD-ROOM                       ;
+RULEVAR D01YACHT-V.BUNKS                                                    
+* CDIR YACHT-V                          BUNKS                           ;
+* MAP2: END OF MAP *****************************************************
+END

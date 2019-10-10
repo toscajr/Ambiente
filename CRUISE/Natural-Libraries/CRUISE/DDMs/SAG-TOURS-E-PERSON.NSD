@@ -1,0 +1,62 @@
+DB: 000 FILE: 018  - SAG-TOURS-E-PERSON               DEFAULT SEQUENCE:   
+TYPE: ADABAS
+ 
+T L DB Name                              F Leng  S D Remark
+- - -- --------------------------------  - ----  - - ------------------------
+*      >Natural Source Header 000000
+*      :CP
+*      
+*      
+*      :LineIncrement 10
+*      <Natural Source Header
+  1 AA PERSON-ID                         N  8,0  N D 
+  1 AB BIRTH-DATE                        N  8,0  N   
+  1 EH SEX                               A    1    D 
+G 1 AC NAME                                          
+  2 AD SURNAME                           A   20    D 
+  2 AE FIRST-NAME-1                      A   20  N   
+  2 AF FIRST-NAME-2                      A   20  N   
+  2 AG TITLE                             A   20  N   
+  2 AH FORM-OF-ADDRESS                   A    8  N   
+G 1 AI ADDRESS                                       
+M 2 AJ ADDRESS-ADDITION                  A   20      
+  2 AK STREET-NUMBER                     A   20  N   
+  2 AL COUNTRY                           A    3    D 
+  2 AM ZIP-CODE                          A   10  N D 
+  2 AN CITY                              A   20    D 
+P 1 AO PHONE                                         
+  2 AP AREA-CODE                         A    6      
+  2 AQ PHONE-NUMBER                      A   15      
+G 1 AU CUSTOMER                                      
+  2 AV CUSTOMER-FLAG                     A    1  N   
+  2 AW DID-CUSTOMER                      A    8  N D 
+G 1 AX OWNER                                         
+  2 AY OWNER-FLAG                        A    1  N   
+  2 AZ DID-OWNER                         A    8  N D 
+G 1 A0 SKIPPER                                       
+  2 A1 SKIPPER-FLAG                      A    1  N   
+  2 A2 DID-SKIPPER                       A    8  N D 
+  2 A3 SKIPPER-SAILING-INSTRUCTOR        A    1  N   
+  1 A4 SURNAME-PH                        A   20    P 
+  1 A5 CUSTOMER-SP                       A    9  N S 
+*      -------- SOURCE FIELD(S) -------
+*      CUSTOMER-FLAG(1-1)
+*      PERSON-ID(1-8)
+  1 A6 OWNER-SP                          A    9  N S 
+*      -------- SOURCE FIELD(S) -------
+*      OWNER-FLAG(1-1)
+*      PERSON-ID(1-8)
+  1 A7 SKIPPER-SP                        A    9  N S 
+*      -------- SOURCE FIELD(S) -------
+*      SKIPPER-FLAG(1-1)
+*      PERSON-ID(1-8)
+  1 EI SEX-SURNAME-SP                    A   21    S 
+*      -------- SOURCE FIELD(S) -------
+*      SEX(1-1)
+*      SURNAME(1-20)
+  1 EJ COUNTRY-CITY-SP                   A   23    S 
+*      -------- SOURCE FIELD(S) -------
+*      COUNTRY(1-3)
+*      CITY(1-20)
+  1 TS LAST-UPDATE                       B    8  N   
+******DDM OUTPUT TERMINATED******

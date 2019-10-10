@@ -1,0 +1,33 @@
+DB: 000 FILE: 018  - SAG-TOURS-E-CONTRACT             DEFAULT SEQUENCE:   
+TYPE: ADABAS
+ 
+T L DB Name                              F Leng  S D Remark
+- - -- --------------------------------  - ----  - - ------------------------
+*      >Natural Source Header 000000
+*      :CP
+*      
+*      
+*      :LineIncrement 10
+*      <Natural Source Header
+  1 B1 CONTRACT-ID                       P  6,0  N D 
+  1 B2 CONTRACT-TYPE                     A    1  N   
+  1 B3 PRICE                             P 10,3  N   
+  1 B4 DID-CONDITIONS                    A    8  N D 
+  1 B5 DATE-RESERVATION                  N  8,0  N D 
+  1 B6 DATE-BOOKING                      N  8,0  N D 
+  1 B7 DATE-CANCELLATION                 N  8,0  N D 
+G 1 B8 DEPOSIT                                       
+  2 B9 DATE-D                            N  8,0  N   
+  2 CA AMOUNT-D                          P 10,3  N   
+G 1 CB PAYMENT-OF-BALANCE                            
+  2 CC DATE-P                            N  8,0  N   
+  2 CD AMOUNT-P                          P 10,3  N   
+  1 CE ID-CUSTOMER                       N  8,0  N D 
+  1 CF ID-CRUISE                         N  8,0  N D 
+  1 CG ID-AGENCY                         A    8  N D 
+  1 CH CONTRACT-TYPE-SP                  A    7  N S 
+*      -------- SOURCE FIELD(S) -------
+*      CONTRACT-TYPE(1-1)
+*      CONTRACT-ID(1-4)
+  1 TS LAST-UPDATE                       B    8  N   
+******DDM OUTPUT TERMINATED******

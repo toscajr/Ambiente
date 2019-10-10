@@ -1,0 +1,58 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+* MAP2: PROTOTYPE              --- CREATED BY WNT 5.1.0 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     #DEVICE-NAME #REPORT-NAME
+DEFINE DATA PARAMETER
+1 #DEVICE-NAME (A008)
+1 #REPORT-NAME (A008)
+END-DEFINE
+SET KEY PF4 (PB=018/055/002/022) NAMED 'Write Yacht-Workfile'
+/* 000 000 000 000
+SET KEY PF5 (PB=010/063/002/014) NAMED 'Print Report'
+/* 000 000 000 000
+SET KEY PF3 (PB=013/063/002/014) NAMED 'Cancel'
+/* 000 000 000 000
+SET KEY PF6 (PB=007/063/002/014) NAMED 'Preview'
+/* 000 000 000 000
+FORMAT PS=022 LS=080 ZP=OFF SG=OFF KD=ON  IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN             X        01 SYSDBA  YR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+/
+ 026T 'Report Sailing-Cruises'
+/
+ 004T '__________________________________________________________'-
+      '_______________'
+/
+/
+/
+/
+ 004T 'DEVICE-NAME:'
+ 017T #DEVICE-NAME  (AD=DLMFHT' ' ) /*.99D008 A008 .
+/
+/
+ 004T 'REPORT-NAME:'
+ 017T #REPORT-NAME  (AD=DLMFHT' ' ) /*.99D008 A008 .
+/
+/
+/
+/
+/
+/
+/
+/
+/
+/
+/
+/
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

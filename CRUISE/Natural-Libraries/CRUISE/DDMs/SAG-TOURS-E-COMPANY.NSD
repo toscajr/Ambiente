@@ -1,0 +1,42 @@
+DB: 000 FILE: 018  - SAG-TOURS-E-COMPANY              DEFAULT SEQUENCE:   
+TYPE: ADABAS
+ 
+T L DB Name                              F Leng  S D Remark
+- - -- --------------------------------  - ----  - - ------------------------
+*      >Natural Source Header 000000
+*      :CP
+*      
+*      
+*      :LineIncrement 10
+*      <Natural Source Header
+  1 A8 COMPANY-ID                        A    8  N D 
+  1 A9 COMPANY-TYPE                      A    1  N   
+  1 BA COMPANY-NAME                      A   30  N D 
+G 1 BB COMPANY-MANAGEMENT                            
+  2 BC NAME                              A   20  N D 
+  2 BD FIRST-NAME-1                      A   20  N   
+  2 BE FIRST-NAME-2                      A   20  N   
+  2 BF TITLE                             A   20  N   
+  2 BG FORM-OF-ADDRESS                   A    8  N   
+G 1 BH COMPANY-ADDRESS                               
+M 2 BI C-ADRESS-ADDITION                 A   20  N   
+  2 BJ C-STREET-NUMBER                   A   20  N   
+  2 BK C-COUNTRY                         A    3  N D 
+  2 BL C-ZIP-CODE                        A   10  N D 
+  2 BM C-CITY                            A   20  N D 
+P 1 BN COMPANY-PHONE                                 
+  2 BO C-AREA-CODE                       A    6  N   
+  2 BP C-PHONE-NUMBER                    A   15  N   
+G 1 BT TELEX                                         
+  2 BU AREA-CODE-TX                      A    6  N   
+  2 BV PHONE-NUMBER-TX                   A   15  N   
+G 1 BW TELEFAX                                       
+  2 BX AREA-CODE-FAX                     A    6  N   
+  2 BY PHONE-NUMBER-FAX                  A   15  N   
+  1 BZ DID-BUSINESS-CONDITIONS           A    8  N D 
+  1 B0 COMPANY-TYPE-SP                   A    9  N S 
+*      -------- SOURCE FIELD(S) -------
+*      COMPANY-TYPE(1-1)
+*      COMPANY-ID(1-8)
+  1 TS LAST-UPDATE                       B    8  N   
+******DDM OUTPUT TERMINATED******

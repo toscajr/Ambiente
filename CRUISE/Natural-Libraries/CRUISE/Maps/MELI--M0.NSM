@@ -1,0 +1,56 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+* MAP2: PROTOTYPE              --- CREATED BY WNT 5.1.0 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     #COMMAND #PROG #TITLE
+DEFINE DATA PARAMETER
+1 #COMMAND (A003)
+1 #PROG (A008)
+1 #TITLE (A020)
+END-DEFINE
+FORMAT PS=021 LS=080 ZP=OFF SG=OFF KD=ON  IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 023079LAYOUT2MN0NNUCN_            X        01 SYSPROF YL             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+ 002T #PROG  (AD=ILO ) /*.01D008 A008 .
+ 029T '* * * SAG-TOURS * * *'
+ 068T *DAT4E  (AD=ILOFHT ) /*.01S010 A010 .
+/
+ 002T *PROGRAM  (AD=IO ) /*.01S008 A008 .
+ 030T #TITLE  (AD=ILO ) /*.01U020 A020 .
+ 070T *TIMX  (AD=IO ) /*.01S008 T    .
+/
+/
+/
+/
+/
+/
+/
+ 022T 'LC'
+ 026T 'List Contracts (Sales Statistics)'
+/
+/
+ 022T 'LY'
+ 026T 'List Yachts'
+/
+/
+/
+/
+/
+/
+/
+/
+/
+/
+ 001T 'Command'
+ 010T '==>'
+ 014T #COMMAND  (AD=ILAT'_' AL=002  ) /*.99U002 A003 .
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

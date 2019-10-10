@@ -1,0 +1,26 @@
+DEFINE DATA LOCAL
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+1 YACHT-M
+  2 YACHT-ID (N8,0)
+  2 YACHT-NAME (A30)
+  2 YACHT-BRANCH (A1)
+  2 ID-CH-BASE (A8)
+  2 YACHT-TYPE (A30)
+  2 LENGTH (P3,2)
+  2 WIDTH (P3,2)
+  2 DRAFT (P3,2)
+  2 SAIL-SURFACE (P3,0)
+  2 MOTOR (P3,0)
+  2 HEAD-ROOM (P3,2)
+  2 BUNKS (P3,0)
+*
+1 #DATA-C (C)
+1 #KEY-C (C)
+1 #DATA (L)
+1 #CHECK-CRUISE-OK (L) /* Referent. Integrity OK
+1 #RESPONSE-CODE (N4) /* 0: OK  1: Record not found
+1 #ISN (I4) /* actual record ID
+END-DEFINE

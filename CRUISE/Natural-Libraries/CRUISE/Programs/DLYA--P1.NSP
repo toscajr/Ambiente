@@ -1,0 +1,121 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+*
+*  Program for function: Delete Yacht
+*
+DEFINE DATA
+GLOBAL USING ST----G0           /* Global Data Area
+LOCAL  USING LAYOUT-L           /* User variables across functions
+LOCAL  USING CR---VL0           /* Data view for cruise access
+LOCAL  USING YA---VL0           /* Local data view for DB access
+LOCAL  USING YA---ML0           /* local user variables
+LOCAL  USING YA----A0           /* PDA used as LDA
+END-DEFINE
+*                               /* Initialize function keys
+INCLUDE DFPF--C0
+*                               /* Initialize map variables
+#PROG    := *PROGRAM
+#TITLE   := '    Delete Yacht'
+*                               /* Control variables for key status
+#KEY-C   := (AD=I)
+#DATA-C  := (AD=P)
+*
+REP.
+REPEAT
+*                                            /* Map output
+  INPUT WITH TEXT #G-MESSAGE-TEXT, #G-OPERAND1
+  USING MAP 'MAYA--M1'
+  RESET #G-MESSAGE #RESPONSE-CODE
+*                                            /* Distinction of cases
+  DECIDE FOR FIRST CONDITION
+    WHEN *PF-KEY = 'ENTR' AND #DATA          /* Continue
+      IGNORE
+    WHEN *PF-KEY = 'ENTR' AND NOT #DATA      /* key status
+      PERFORM KEY-CHECK
+    WHEN *PF-KEY = 'PF3' AND #DATA           /* Data status
+      PERFORM CHECK-CRUISE                   /* Check referential integrity
+      IF #CHECK-CRUISE-OK
+        PERFORM DELETE-YACHT                 /* Delete yacht
+        IF #RESPONSE-CODE = 0
+          END TRANSACTION                    /* Transaction control
+        ELSE
+          BACKOUT TRANSACTION
+        END-IF
+        ESCAPE BOTTOM (REP.)
+      END-IF
+    WHEN *PF-KEY = 'PF12'                    /* Cancellation of function
+      #G-MESSAGE-TEXT := 'Yacht :1: deletion was cancelled'
+      #G-OPERAND1     := YACHT-M.YACHT-ID
+      ESCAPE BOTTOM (REP.)
+    WHEN NONE
+      #G-MESSAGE-TEXT := 'Please select a valid function!'
+  END-DECIDE
+END-REPEAT
+*
+FETCH 'MEYA--P0'                            /* Return to submenu
+*
+* Inline Subroutines
+*
+DEFINE SUBROUTINE KEY-CHECK
+IF #KEY-C NOT MODIFIED
+  #G-MESSAGE-TEXT  := 'Please enter Yacht-ID!'
+ELSE                                        /* Database access
+*                                           /* Check Yacht-ID for existence
+*                                           /* non-existence
+  /* FIND YACHT-V WITH YACHT-ID = YACHT-M.YACHT-ID
+  /*     IF NO RECORDS FOUND
+  /*      #RESPONSE-CODE := 1
+  /*      ESCAPE BOTTOM
+  /*   END-NOREC
+  /*   MOVE BY NAME YACHT-V TO YACHT-M
+  /*   UPDATE                               /* for pessimistic locking
+  /*   MOVE *ISN TO #ISN                    /* ISN for GET
+  /* END-FIND
+  /*
+  CALLNAT 'REYA--N1' YACHT-M.YACHT-ID #RESPONSE-CODE YACHT-P  /* with HOLD
+  MOVE BY NAME YACHT-P TO YACHT-M
+  /*
+* ...
+  IF #RESPONSE-CODE = 0                    /* Yacht does not exist
+    #DATA           := TRUE                /* Apply map status
+    #KEY-C          := (AD=PI)             /* Apply control variables
+    #DATA-C         := (AD=I)              /* I for add / modify yacht
+  ELSE                                     /* Yacht does not exist
+    #G-MESSAGE-TEXT := 'Yacht :1: does not exist !'
+    #G-OPERAND1     := YACHT-M.YACHT-ID
+    RESET YACHT-M
+  END-IF
+END-IF
+END-SUBROUTINE
+*
+*
+DEFINE SUBROUTINE CHECK-CRUISE
+RESET #CHECK-CRUISE-OK
+*                               /* DB access : Check referential integrity
+FIND NUMBER CRUISE-V WITH ID-YACHT = YACHT-M.YACHT-ID
+IF *NUMBER = 0
+  #CHECK-CRUISE-OK  := TRUE
+ELSE
+  #G-MESSAGE-TEXT   := 'Yacht :1: is assigned to cruise(s)' -
+    ' and cannot be deleted!'
+  #G-OPERAND1       := YACHT-M.YACHT-ID
+END-IF
+END-SUBROUTINE
+*
+DEFINE SUBROUTINE DELETE-YACHT
+/* DB access : delete yacht
+CALLNAT 'DLYA--N1' YACHT-M.YACHT-ID #RESPONSE-CODE YACHT-P
+IF #RESPONSE-CODE = 0                     /* Yacht ok deleted
+  #G-MESSAGE-TEXT   := 'Yacht :1: was deleted!'
+  #G-OPERAND1       := YACHT-M.YACHT-ID
+ELSE
+  #G-MESSAGE-TEXT   := 'Yacht :1: was not deleted - error!'
+  #G-OPERAND1       := YACHT-M.YACHT-ID
+END-IF
+END-SUBROUTINE
+*
+END
+

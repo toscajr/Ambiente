@@ -1,0 +1,12 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+* Copycode for default function key settings
+** 1150
+SET KEY ALL
+SET KEY ENTR NAMED 'OK'
+SET KEY PF3  NAMED 'Quit'
+SET KEY PF12 NAMED 'Canc'
+

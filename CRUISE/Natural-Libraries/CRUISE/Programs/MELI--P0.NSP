@@ -1,0 +1,44 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+*
+*  Program for Menu Lists
+*
+DEFINE DATA
+GLOBAL USING ST----G0         /* Global Data Area
+LOCAL  USING LAYOUT-L         /* User variables across functions
+END-DEFINE
+*                             /* Initialize function keys explicitly
+*                             /* or standard copycode INCLUDE DFPF--C0
+INCLUDE DFPF--C0
+*                             /* Initialize map variables
+#TITLE := '    Menu Lists'
+#PROG  := *PROGRAM
+*
+REPEAT
+*                                     /* Map output with message text
+  INPUT WITH TEXT #G-MESSAGE-TEXT, #G-OPERAND1
+  USING MAP 'MELI--M0'
+  RESET #G-MESSAGE
+*                                     /* Control after map output
+  DECIDE FOR FIRST CONDITION
+    WHEN *PF-KEY = 'PF3' OR= 'PF12'
+      #G-MESSAGE-TEXT := 'Menu :1: was terminated - please make a new selection!'
+      #G-OPERAND1     := #TITLE
+      FETCH 'MENU--P0'
+    WHEN #COMMAND = 'LC'
+      FETCH 'LICO--P1'
+    WHEN #COMMAND = 'LY' AND *MACHINE-CLASS = 'PC'
+      FETCH 'LIYA--P1'
+    WHEN #COMMAND = 'LY' AND *MACHINE-CLASS NE 'PC'
+      FETCH 'LIYA--P2'
+    WHEN NONE
+      #G-MESSAGE-TEXT := 'Please select valid function!'
+  END-DECIDE
+*
+END-REPEAT
+*
+END
+

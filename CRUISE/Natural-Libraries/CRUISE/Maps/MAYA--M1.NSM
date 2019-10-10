@@ -1,0 +1,117 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 9.1.1 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     #DATA-C #KEY-C #PROG #TITLE YACHT-M.BUNKS YACHT-M.DRAFT YACHT-M.HEAD-ROOM
+*     YACHT-M.LENGTH YACHT-M.MOTOR YACHT-M.SAIL-SURFACE YACHT-M.WIDTH YACHT-M.YACHT-BRANCH
+*     YACHT-M.YACHT-ID YACHT-M.YACHT-NAME YACHT-M.YACHT-TYPE
+DEFINE DATA PARAMETER
+1  #DATA-C (C)
+1  #KEY-C (C)
+1 #PROG (A008)
+1 #TITLE (A020)
+1 YACHT-M.BUNKS (P03,0)
+1 YACHT-M.DRAFT (P03,2)
+1 YACHT-M.HEAD-ROOM (P03,2)
+1 YACHT-M.LENGTH (P03,2)
+1 YACHT-M.MOTOR (P03,0)
+1 YACHT-M.SAIL-SURFACE (P03,0)
+1 YACHT-M.WIDTH (P03,2)
+1 YACHT-M.YACHT-BRANCH (A001)
+1 YACHT-M.YACHT-ID (N08,0)
+1 YACHT-M.YACHT-NAME (A030)
+1 YACHT-M.YACHT-TYPE (A030)
+END-DEFINE
+FORMAT PS=021 LS=080 ZP=OFF SG=OFF KD=ON IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* ,TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 023079LAYOUT2MN0NNUCN_            X        01 SYSPROF YL             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+ 002T #PROG /*.01D008 A008 .
+      (AD=OIL )
+ 029T '* * * SAG-TOURS * * *'
+ 068T *DAT4E /*.01S010 A010 .
+      (AD=OIL )
+/
+ 002T *PROGRAM /*.01S008 A008 .
+      (AD=OI )
+ 030T #TITLE /*.01U020 A020 .
+      (AD=OIL )
+ 070T *TIMX /*.01S008 T    .
+      (AD=OI )
+/
+ 001T '-'
+/
+/
+ 002T 'Identification:__'
+/
+ 005T 'Yacht-ID'
+ 014T '.' (016)
+ 031T YACHT-M.YACHT-ID /*.99D008 N08,0.
+      (AD=MYLT'_' CV=#KEY-C )
+/
+ 005T 'Yacht-name ..............'
+ 031T YACHT-M.YACHT-NAME /*.99D030 A030 .
+      (AD=MYLT'_' CV=#DATA-C )
+/
+ 005T 'Yacht-branch ............'
+ 031T YACHT-M.YACHT-BRANCH /*.99D001 A001 .
+      (AD=MYLT'_' CV=#DATA-C )
+ 034T '(A charter/B sailing )'
+/
+/
+ 002T 'Description'
+/
+ 005T 'Yacht-type ..............'
+ 031T YACHT-M.YACHT-TYPE /*.99D030 A030 .
+      (AD=MYLT'_' CV=#DATA-C )
+/
+ 005T 'Length'
+ 012T '.' (018)
+ 031T YACHT-M.LENGTH /*.99D006 P03,2.
+      (AD=MYLT'_' CV=#DATA-C )
+ 038T 'meters'
+/
+ 005T 'Width'
+ 011T '.' (019)
+ 031T YACHT-M.WIDTH /*.99D006 P03,2.
+      (AD=MYLT'_' CV=#DATA-C )
+ 038T 'meters'
+/
+ 005T 'Draft'
+ 011T '.' (019)
+ 031T YACHT-M.DRAFT /*.99D006 P03,2.
+      (AD=MYLT'_' CV=#DATA-C )
+ 038T 'meters'
+/
+ 005T 'Sail-surface ............'
+ 031T YACHT-M.SAIL-SURFACE /*.99D003 P03,0.
+      (AD=MYLT'_' CV=#DATA-C )
+ 038T 'square meters'
+/
+ 005T 'Motor'
+ 011T '.' (019)
+ 031T YACHT-M.MOTOR /*.99D003 P03,0.
+      (AD=MYLT'_' CV=#DATA-C )
+ 038T 'kilowatts'
+/
+ 005T 'Head-room ...............'
+ 031T YACHT-M.HEAD-ROOM /*.99D006 P03,2.
+      (AD=MYLT'_' CV=#DATA-C )
+ 038T 'meters'
+/
+ 005T 'Bunks'
+ 011T '.' (019)
+ 031T YACHT-M.BUNKS /*.99D003 P03,0.
+      (AD=MYLT'_' CV=#DATA-C )
+/
+/
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

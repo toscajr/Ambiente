@@ -1,0 +1,41 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+*
+* SAG-Tours Main Menu
+* tosca
+DEFINE DATA
+GLOBAL USING ST----G0   /* Global Data Area
+LOCAL  USING LAYOUT-L   /* User variables across functions
+END-DEFINE
+*                       /* Initilaize function keys explicitly
+*                       /* or standard copycode INCLUDE DFPF--C0
+INCLUDE DFPF--C0
+*                       /* Initialize map variables
+#TITLE  := '     Main Menu '
+#PROG   := *PROGRAM
+*
+REPEAT
+  INPUT WITH TEXT #G-MESSAGE-TEXT, #G-OPERAND1
+  USING MAP 'MENU--M0'
+  RESET #G-MESSAGE
+*                                   /* Control of map output
+  DECIDE FOR FIRST CONDITION
+    WHEN *PF-KEY = 'PF3' OR= 'PF12' /* Leave function
+      ESCAPE ROUTINE
+    WHEN #COMMAND = 'SYA'           /* Call Yacht submenu
+      FETCH 'MEYA--P0'
+    WHEN #COMMAND = 'SLI'           /* Call List submenu
+      FETCH 'MELI--P0'
+    WHEN #COMMAND = 'SIN' OR= 'SBO' /* not yet implemented
+      #G-MESSAGE-TEXT := 'This function is not yet implemented.'
+    WHEN NONE
+      #G-MESSAGE-TEXT := 'Please select a valid function!'
+  END-DECIDE
+*
+END-REPEAT
+*
+END
+

@@ -1,0 +1,19 @@
+DEFINE DATA PARAMETER
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+1 YACHT-P
+  2 YACHT-ID (N8,0)
+  2 YACHT-NAME (A30)
+  2 YACHT-BRANCH (A1) /* 'A' if zzcharter yacht
+  2 ID-CH-BASE (A8) /* only for YACHT-BRANCH = 'A'
+  2 YACHT-TYPE (A30)
+  2 LENGTH (P3,2) /*in meters
+  2 WIDTH (P3,2) /*in meters
+  2 DRAFT (P3,2) /*in meters
+  2 SAIL-SURFACE (P3,0) /*in square meters
+  2 MOTOR (P3,0) /*output in KW
+  2 HEAD-ROOM (P3,2) /*headroom in saloon in meters
+  2 BUNKS (P3,0) /*number of bunks
+END-DEFINE

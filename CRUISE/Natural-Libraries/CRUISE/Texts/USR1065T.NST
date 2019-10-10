@@ -1,0 +1,15 @@
+* >Natural Source Header 000000
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+Readme for Reporter - Example
+
+Yachts sorted by Yacht-Type
+
+using workfile      wrk3.ncd
+                    wrk3.ncf
+and report-template yacht-rp.rpt
+
+library SYSEXT has to be defined as steplib
+workfile 3 has to be defined in NATPARM
+*****  End of description  *****

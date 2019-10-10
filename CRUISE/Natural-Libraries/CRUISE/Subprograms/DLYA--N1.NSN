@@ -1,0 +1,34 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* :LineIncrement 10
+* <Natural Source Header
+*
+*  also skeleton for ADYA--N1 and MOYA--N1
+*  Single record access to database object YACHT with known primary key
+*  and pessimistic locking
+*
+* alterado 1259 
+DEFINE DATA
+PARAMETER
+1 #KEY                 (N8)           /*  IN   Primary key field
+1 #RESPONSE-CODE       (N4)           /*  OUT  0: OK  1: Record not found
+PARAMETER USING YA----A0              /*  IN   PDA of object to be read
+LOCAL     USING YA---VL0              /*  local data view for DB access
+END-DEFINE
+*
+RESET #RESPONSE-CODE                  /*      Parameter group
+*
+FIND YACHT-V WITH YACHT-ID = #KEY
+  IF NO RECORDS FOUND
+    #RESPONSE-CODE := 1
+    ESCAPE BOTTOM
+  END-NOREC
+  DELETE                              /* only in DLYA--N1
+  /* MOVE BY NAME YACHT-P TO YACHT-V  /* Transfer of all standard fields
+  /* STORE YACHT-V / UPDATE           /* in subprograms ADYA--N1 / MOYA--N1
+END-FIND
+*
+END
+
+
